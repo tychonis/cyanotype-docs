@@ -1,47 +1,83 @@
 ---
+id: intro
+slug: /
+title: Introduction
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Cyanotype
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**Cyanotype is an open-source, code-first system for managing Bills of Materials (BoMs), product definitions, and engineering changes.**
 
-## Getting Started
+It brings software engineering practices—version control, code review, automated testing, and continuous integration—to hardware development.
 
-Get started by **creating a new site**.
+## Why Cyanotype?
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Modern hardware development involves multiple disconnected systems. CAD tools describe geometry and assemblies, PLM systems manage product definitions, and ERP systems manage manufacturing and procurement.
 
-### What you'll need
+Moving information between these systems often requires manual synchronization, proprietary integrations, and duplicated data.
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+Unlike software, where source code provides a version-controlled representation of the system, hardware product definitions are frequently distributed across files, databases, and applications.
 
-## Generate a new site
+Cyanotype aims to make product definitions **explicit, portable, reproducible, and version-controlled**.
 
-Generate a new Docusaurus site using the **classic template**.
+## BoM as Code
 
-The classic template will automatically be added to your project after you run the command:
+Cyanotype represents product definitions using a human-readable declarative language.
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Rather than treating a BoM as a spreadsheet or a static export from CAD, Cyanotype treats it as a program that describes how a product is constructed.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+This enables:
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+- **Version control:** Track engineering changes using Git, including meaningful diffs and revision history.
+- **Code review:** Review changes to product structures through standard pull-request workflows.
+- **Automation:** Generate product definitions from CAD, validate changes, and integrate with CI/CD pipelines.
+- **Reproducibility:** Reconstruct product structures from versioned definitions and referenced artifacts.
+- **Interoperability:** Connect CAD, engineering, and manufacturing workflows through a common representation.
 
-## Start your site
+## Core Concepts
 
-Run the development server:
+Cyanotype separates product requirements, concrete implementations, and the relationships between them.
 
-```bash
-cd my-website
-npm run start
-```
+Four fundamental concepts form its data model:
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+| Concept | Description |
+|---|---|
+| **CoItem** | An abstract requirement or functional slot that can be fulfilled by different implementations. |
+| **CoProcess** | A qualification mechanism that establishes how an Item satisfies a CoItem. |
+| **Item** | A concrete part or assembly implementation, potentially associated with CAD geometry and other artifacts. |
+| **Process** | A definition of how Items are produced or assembled from input requirements. |
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+These concepts form a directed graph, which can be resolved into a **BoMTree** representing a particular product configuration.
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+By separating requirements from implementations, Cyanotype can model part interchangeability without assuming that different parts are universally equivalent.
+
+## From CAD to BoM
+
+Cyanotype supports a workflow in which engineering definitions are generated from CAD assemblies and maintained as version-controlled source files.
+
+A typical workflow is:
+
+1. **Export:** Extract assembly structure, component placements, and geometry from CAD.
+2. **Generate:** Convert the extracted information into Cyanotype product definitions.
+3. **Review:** Inspect generated changes using Git diffs and pull requests.
+4. **Build:** Resolve definitions into product structures and generate derived artifacts.
+5. **Publish:** Store and distribute product definitions and artifacts for downstream use.
+
+This workflow supports automated code generation and continuous integration while allowing engineers to maintain meaningful, human-readable product definitions.
+
+## Beyond Traditional BoMs
+
+A conventional BoM typically describes which parts are used in a product.
+
+Cyanotype additionally models **why a particular implementation satisfies a requirement**, how components relate through assembly processes, and how those relationships evolve across revisions.
+
+This provides a foundation for managing engineering changes, tracking interchangeability, and connecting product design with manufacturing and supply-chain systems.
+
+## Project Status
+
+Cyanotype is under active development. Its current focus is CAD integration, declarative product definitions, revision tracking, automated generation, and interactive visualization of product structures.
+
+The long-term goal is to establish an open, programmable foundation for hardware product lifecycle management.
+
+**Source code:** [GitHub](https://github.com/tychonis/cyanotype)
