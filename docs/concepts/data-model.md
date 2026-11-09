@@ -5,9 +5,13 @@ sidebar_position: 2
 
 # Core Data Model
 
-Cyanotype represents product definitions using four fundamental entities: **Item, CoItem, Process, and CoProcess**.
+Cyanotype’s data model is centered on **interchangeability** rather than geometry: what requirements must a part or assembly satisfy, and which implementations can satisfy them?
 
-Together, they describe what a product requires, how those requirements are satisfied, and how concrete products are constructed.
+This encourages engineers to record what they actually care about in a particular context. A motor might need to provide a minimum torque, fit a mounting interface, and operate at a specified voltage. Its exact geometry may matter only where it affects those requirements. Conversely, two geometrically identical motors may not be interchangeable if their performance differs.
+
+Geometry remains important engineering information, but it is one part of the product definition. By expressing requirements separately from implementations, engineers can preserve design intent while allowing alternative parts, suppliers, and revisions.
+
+Cyanotype represents these distinctions through four fundamental entities: **Item, CoItem, Process, and CoProcess**, they describe what a product requires, how those requirements are satisfied, and how concrete products are constructed.
 
 ## 1. Item
 
